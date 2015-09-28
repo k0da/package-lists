@@ -16,6 +16,9 @@ case $proj in
         Leap:42.1) arches="x86_64"
                 repo="standard"
                 ;;
+        Leap:42.1:Ports) arches="ppc64le"
+                repo="ports"
+                ;;
 	Factory:PowerPC) arches="ppc64 ppc64le"
 		repo="standard"
 		;;
@@ -83,7 +86,7 @@ for arch in $arches; do
 
     # first flash
     : > opensuse/$proj/dvd-1.$arch.suggests
-    if ./gen.pl opensuse/$proj/dvd-1 $arch "$proj"; then
+    if ./gen.pl opensuse/$proj/dvd-1 $arch "$proj" $repo; then
 
       # then readd
       mv output/opensuse/$proj/dvd-1.$arch.suggests opensuse/$proj/dvd-1.$arch.suggests
